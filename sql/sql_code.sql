@@ -1,5 +1,5 @@
 -- psql -d boardgame_dev < sql/sql_code.sql
-
+DROP TABLE IF EXISTS lfg;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS boardgames;
 DROP TABLE IF EXISTS players;
@@ -106,7 +106,32 @@ VALUES
 -- WHERE avg_rating < 8.3;
 
 -- Task 6a
-SELECT *
+-- SELECT *
+-- FROM boardgames
+-- JOIN reviews ON (boardgames.id = reviews.boardgame_id)
+-- WHERE boardgames.id = 5;
+
+CREATE TABLE lfg (
+    id SERIAL PRIMARY KEY,
+    player_id INTEGER,
+    game_id INTEGER,
+    FOREIGN KEY (game_id) REFERENCES boardgames (id),
+    FOREIGN KEY (player_id) REFERENCES players (id)
+);
+
+INSERT INTO lfg (player_id, game_id)
+VALUES
+    (1, 5),
+    (1, 2),
+    (3, 1),
+    (5, 5),
+    (2, 2),
+    (4, 4),
+    (6, 4),
+    (1, 4);
+
+SELECT boardgames.name, boardgames.id, lfg.game_id, lfg.player_id, players.id, players.name 
 FROM boardgames
-JOIN reviews ON (boardgames.id = reviews.boardgame_id)
-WHERE boardgames.id = 5;
+JOIN lfg ON (boardgames.id = lfg.game_id)
+JOIN players ON (lfg.player_id = players.id)
+WHERE boardgames.name = 'Terraforming Mars';

@@ -30,21 +30,21 @@ VALUES
 
 -- JOIN TABLE
 
--- CREATE TABLE lfg (
---     id SERIAL PRIMARY KEY,
---     player_id INTEGER,
---     game_id INTEGER,
---     FOREIGN KEY (player_id) REFERENCES players
---     FOREIGN KEY (game_id) REFERENCES boardgames,
--- );
+CREATE TABLE lfg (
+    id SERIAL PRIMARY KEY,
+    player_id INTEGER,
+    game_id INTEGER,
+    FOREIGN KEY (player_id) REFERENCES players
+    FOREIGN KEY (game_id) REFERENCES boardgames,
+);
 
--- INSERT INTO lfg (player_id, game_id)
--- VALUES
---     (1, 5),
---     (1, 2),
---     (3, 1),
---     (5, 5),
---     (2, 2),
---     (4, 4),
---     (6, 4),
---     (1, 4);
+INSERT INTO lfg (player_id, game_id)
+VALUES
+    (1, 5),
+    (1, 2),
+    (3, 1),
+    (5, 5),
+    (2, 2),
+    (4, 4),
+    (6, 4),
+    (1, 4);
