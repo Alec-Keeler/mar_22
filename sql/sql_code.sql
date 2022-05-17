@@ -30,6 +30,7 @@ CREATE TABLE reviews (
 
 ALTER TABLE players ADD COLUMN prefers_video_games BOOLEAN DEFAULT false;
 
+-- Task 3
 INSERT INTO boardgames (name, avg_rating, max_players, category)
 VALUES
     ('Gloomhaven', 8.8, 4, 'Adventure'),
@@ -54,5 +55,43 @@ INSERT INTO reviews (content, boardgame_id)
 VALUES
     ('There is nothing I love more than escaping one pandemic for another, 10/10', 2),
     ('This game is far too long!', 5),
-    ('My friends and I really like this game, lots of replayability', 6),
+    ('My friends and I really love this game, lots of replayability', 6),
     ('I can be a space pirate, favorite game hands down.', 5);
+
+-- Task 4a
+-- SELECT * FROM boardgames;
+
+-- Task 4b
+-- SELECT name, category FROM boardgames;
+
+-- Task 4c
+-- SELECT * FROM boardgames
+-- WHERE category = 'Adventure';
+
+-- Task 4d
+-- SELECT * 
+-- FROM boardgames
+-- WHERE avg_rating BETWEEN 8.0 AND 8.5;
+
+-- Task 4e
+-- SELECT *
+-- FROM boardgames
+-- WHERE max_players >= 5;
+
+-- Task 4f
+-- SELECT * 
+-- FROM boardgames
+-- WHERE category IN ('Adventure', 'Economic');
+
+-- Task 4g
+-- SELECT * FROM reviews
+-- WHERE content ILIKE 'th%';
+
+-- Task 4h
+-- SELECT name, (avg_rating * 1.0) AS percentage
+-- FROM boardgames
+-- WHERE category = 'Strategy';
+
+-- SELECT name FROM players
+-- ORDER BY name DESC
+-- LIMIT 1;
