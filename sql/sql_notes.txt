@@ -22,3 +22,7 @@ Steps to set up a DB for a project:
         age SMALLINT
     );
 4. Insert data
+
+
+Running a sql file:
+psql -d boardgame_dev < path_to_file
