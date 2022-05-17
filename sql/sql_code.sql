@@ -95,3 +95,18 @@ VALUES
 -- SELECT name FROM players
 -- ORDER BY name DESC
 -- LIMIT 1;
+
+-- Task 5a
+-- UPDATE players
+-- SET prefers_video_games = true
+-- WHERE name IN ('Alec', 'Geoff');
+
+-- Task 5b
+-- DELETE FROM boardgames
+-- WHERE avg_rating < 8.3;
+
+-- Task 6a
+SELECT *
+FROM boardgames
+JOIN reviews ON (boardgames.id = reviews.boardgame_id)
+WHERE boardgames.id = 5;
