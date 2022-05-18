@@ -37,3 +37,28 @@ Step 6
     npx sequelize model:generate --name ModelName --attributes colName:dataType,colName:dataType
     npx sequelize db:migrate
     npx sequelize db:migrate:undo:all
+
+Step 7
+    Create Associations
+        hasOne
+        hasMany
+        belongsTo
+        belongsToMany
+
+Step 8
+    Seed data
+        npx sequelize seed:generate --name itemSeeds
+
+        npx sequelize db:seed:all
+        npx sequelzie db:seed:undo:all
+
+If you need to reset your DB:
+    npx sequelize db:seed:undo:all
+    npx seqeulize db:migrate:undo:all
+    npx sequelize db:migrate
+    npx sequelize db:seed:all
+
+    npx sequelize db:drop
+    npx sequelize db:create
+    npx sequelize db:migrate
+    npx sequelize db:seed:all
