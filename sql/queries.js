@@ -145,7 +145,7 @@ async function getProfile(userId) {
     console.log(JSON.stringify(user, null, 2))
 }
 
-// getProfile(2)
+getProfile(2)
 
 // Task 14b
 async function getProfileAndSubs(userId) {
