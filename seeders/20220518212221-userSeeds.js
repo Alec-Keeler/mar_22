@@ -12,12 +12,28 @@ module.exports = {
      {
        username: 'Nate',
        password: 'nateisgreat',
+       faveBread: 'baguette',
        createdAt: new Date(),
        updatedAt: new Date(),
      },
      {
        username: 'Shane',
        password: 'shaneisbane',
+       faveBread: 'sourdough',
+       createdAt: new Date(),
+       updatedAt: new Date(),
+     },
+     {
+       username: 'Dan',
+       password: 'pizzaisbread',
+       faveBread: 'pizza',
+       createdAt: new Date(),
+       updatedAt: new Date(),
+     },
+     {
+       username: 'Ray',
+       password: 'xXgarlicmasterXx',
+       faveBread: 'GARLIC BREAD',
        createdAt: new Date(),
        updatedAt: new Date(),
      },
