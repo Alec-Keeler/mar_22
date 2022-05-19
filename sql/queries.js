@@ -1,5 +1,5 @@
 // Task 11
-const {User, Post, Sequelize: {Op}} = require('../models');
+const {User, Post, Subbreaddit, Sequelize: {Op}} = require('../models');
 
 // Task 11a
 async function buildUser() {
@@ -135,3 +135,36 @@ async function deleteUser(username) {
 }
 
 // deleteUser('Ray')
+
+// Task 14a
+async function getProfile(userId) {
+    const user = await User.findByPk(userId, {
+        include: Post
+    })
+
+    console.log(JSON.stringify(user, null, 2))
+}
+
+// getProfile(2)
+
+// Task 14b
+async function getProfileAndSubs(userId) {
+    const user = await User.findByPk(userId, {
+        include: [Post, Subbreaddit]
+    })
+
+    console.log(JSON.stringify(user, null, 2))
+}
+
+// getProfileAndSubs(2)
+
+// Task 14c
+async function getUserPostsSubs(userId) {
+    const user = await User.findByPk(userId, {
+        include: { model: Post, include: {model: Subbreaddit} }
+    })
+
+    console.log(JSON.stringify(user, null, 2))
+}
+
+// getUserPostsSubs(2)
