@@ -109,3 +109,29 @@ async function getPostsInOrder() {
 }
 
 // getPostsInOrder()
+
+// Task 13a
+
+async function updateUser(userId) {
+    const user = await User.findByPk(userId)
+
+    user.username = 'Alec Keeler'
+    user.bio = 'I am Alec Keeler'
+
+    await user.save()
+}
+
+// updateUser(5)
+
+// Task 13b
+async function deleteUser(username) {
+    const user = await User.findOne({
+        where: {
+            username
+        }
+    })
+
+    await user.destroy()
+}
+
+// deleteUser('Ray')
