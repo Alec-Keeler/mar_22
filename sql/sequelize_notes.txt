@@ -62,3 +62,12 @@ If you need to reset your DB:
     npx sequelize db:create
     npx sequelize db:migrate
     npx sequelize db:seed:all
+
+Sequelize query methods
+    create
+    build
+    save
+    destroy
+    findByPk
+    findOne
+    findAll
