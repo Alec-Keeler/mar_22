@@ -1,0 +1,30 @@
+Step 1 - Install Packages
+    express
+    pug
+    (optional) nodemon
+
+Step 2 - Initialize Pipeline
+    Create an app.js
+    import express
+    use the express package to create an app object
+    listen to a port
+
+app methods:
+    listen
+    set
+    use
+    get
+    post
+    delete
+    put/patch
+
+response methods:
+    send
+    render
+    redirect
+    json
+
+Pug set up:
+    npm install pug
+    app.set('view engine', 'pug')
+    create a views directory (at root of project)
