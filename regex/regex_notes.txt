@@ -1,0 +1,19 @@
+* = 0 or more
++ = 1 or more
+? = 0 or 1
+{} = matches exact number, range or more than given value (comma separated)
+
+\ = Escapes character
+. = Any character
+^ = start of input
+$ = end of input
+[] = List of optional characters [A-z]
+[^] = Not any characters in list
+() = Group of characters 
+
+\s = whitespace
+\d = digit
+\w = letters, numbers, _
+
+email: ^.+@[a-z]+\.[a-z]{2,3}$
+phone number: ^\(?\d{3}\)?\-?\d{3}\-\d{4}$
