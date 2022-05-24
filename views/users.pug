@@ -1,10 +1,14 @@
 html 
     head
         title Breaddit 
+        link(rel="stylesheet", href="/css/test.css")
     body
         //- Task 19b
         each user in users
-            h3#header= user.username
-            p= user.password
-            p= user.bio
-            img(class = 'SomeClass' id = user.id src=user.avatar).anotherClass.yetAnotherClass
+            div.userContainer
+                h3#header= user.username
+                p= user.password
+                p= user.bio
+                img(class = 'SomeClass' id = user.id src=user.avatar).anotherClass.yetAnotherClass
+                p= user.faveBread
+                a(href=`/users/${user.id}`) Go to #{user.username}'s profile

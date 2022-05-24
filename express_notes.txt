@@ -17,6 +17,7 @@ app methods:
     post
     delete
     put/patch
+    all
 
 response methods:
     send

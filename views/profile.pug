@@ -1,0 +1,13 @@
+html 
+    head
+        title Breaddit 
+    body
+        h3#header= user.username
+        p= user.password
+        p= user.bio
+        img(class = 'SomeClass' id = user.id src=user.avatar).anotherClass.yetAnotherClass
+        p= user.faveBread
+        a(href=`/users/${user.id}`) Go to #{user.username}'s profile
+        each post in user.Posts
+            h2= post.title
+            p= post.content
