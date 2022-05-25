@@ -1,11 +1,13 @@
 const express = require('express');
 const { User, Post } = require('./models');
 const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
 // Task 16a
 const app = express();
 
 // Task 20b
 app.use('/users', usersRouter)
+app.use('/posts', postsRouter)
 // app.use('/bananas', usersRouter)
 
 // Task 17

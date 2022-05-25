@@ -1,0 +1,9 @@
+extends layout.pug
+block mainContent
+    h1 Hello, Create a Post Here
+    form(action="/posts" method="post") 
+        label Title
+        input(type="text" name="title")
+        label Content
+        textarea(name="content", cols="30", rows="10") 
+        button Post Post
