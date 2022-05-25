@@ -1,0 +1,10 @@
+//- Task 23b
+mixin userRow(user)
+    tr
+        td= user.username
+        td= user.password
+        td= user.faveBread
+        td= user.bio
+        td: img(class = 'SomeClass' id = user.id src=user.avatar)
+        if users
+            td: a(href=`/users/${user.id}`) #{user.username}'s profile

@@ -1,14 +1,36 @@
-html 
-    head
-        title Breaddit 
-        link(rel="stylesheet", href="/css/test.css")
-    body
+extends layout.pug
+block mainContent
+    link(rel="stylesheet", href="/css/test.css")
+    //- Task 24a
+    include utils.pug
+    //- Task 23a
+    table
+        thead
+            tr
+                th Username
+                th Password
+                th Favorite Bread
+                th Bio 
+                th Avatar
+                th Profile Link
+        tbody
+            each user in users
+                +userRow(user)
+                    //- td: a(href=`/users/${user.id}`) #{user.username}'s profile
+
+
+
+
+
+
+
+
         //- Task 19b
-        each user in users
-            div.userContainer
-                h3#header= user.username
-                p= user.password
-                p= user.bio
-                img(class = 'SomeClass' id = user.id src=user.avatar).anotherClass.yetAnotherClass
-                p= user.faveBread
-                a(href=`/users/${user.id}`) Go to #{user.username}'s profile
+        //- each user in users 
+            //- div.userContainer
+            //-     h3#header= user.username
+            //-     p= user.password
+            //-     p= user.bio
+            //-     img(class = 'SomeClass' id = user.id src=user.avatar).anotherClass.yetAnotherClass
+            //-     p= user.faveBread
+            //-     a(href=`/users/${user.id}`) Go to #{user.username}'s profile
