@@ -2,8 +2,20 @@ const express = require('express');
 const { User, Post } = require('./models');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
+const cookieParser = require('cookie-parser');
+
 // Task 16a
 const app = express();
+
+// Task 26a
+app.use((req, res, next) => {
+    req.banana = true
+    next()
+})
+
+// Task 27a
+app.use(express.urlencoded({extended: false}))
+app.use(cookieParser())
 
 // Task 20b
 app.use('/users', usersRouter)

@@ -1,9 +1,13 @@
 extends layout.pug
 block mainContent
     h1 Hello, Create a Post Here
+    if errors.length
+        each err in errors
+            p= err
     form(action="/posts" method="post") 
+        input(type="hidden" name="_csrf" value=csrfToken)
         label Title
-        input(type="text" name="title")
+        input(type="text" name="title" value=data.title)
         label Content
-        textarea(name="content", cols="30", rows="10") 
+        input(type="text" name="content" value=data.content) 
         button Post Post
