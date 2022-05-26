@@ -1,5 +1,5 @@
 const express = require('express');
-const { User, Post } = require('./models');
+const { User, Post } = require('./db/models');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const cookieParser = require('cookie-parser');
@@ -41,8 +41,19 @@ app.get('/', (req, res) => {
 // /posts/1
 // /posts/1/comments
 
-app.all(/[abc]+[0-9]{1}/, (req, res) => {
-    res.send('this is the regex route')
+// app.all(/[abc]+[0-9]{1}/, (req, res) => {
+//     res.send('this is the regex route')
+// })
+
+// Task 31a
+app.use((req, res, next) => {
+    res.status(404)
+    res.send('Hey we couldn\'t find the page you were looking for')
+})
+
+app.use((err, req, res, next) => {
+    console.log(err.message)
+    res.send(err.message)
 })
 
 // Task 22
@@ -51,5 +62,6 @@ app.use(express.static('./public'))
 // Task 18a
 app.set('view engine', 'pug')
 // Task 16b
-const port = 8080;
-app.listen(port, () => console.log(`Listening on port ${port}...`))
+// const port = 8080;
+// app.listen(port, () => console.log(`Listening on port ${port}...`))
+module.exports = app;
