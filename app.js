@@ -41,8 +41,19 @@ app.get('/', (req, res) => {
 // /posts/1
 // /posts/1/comments
 
-app.all(/[abc]+[0-9]{1}/, (req, res) => {
-    res.send('this is the regex route')
+// app.all(/[abc]+[0-9]{1}/, (req, res) => {
+//     res.send('this is the regex route')
+// })
+
+// Task 31a
+app.use((req, res, next) => {
+    res.status(404)
+    res.send('Hey we couldn\'t find the page you were looking for')
+})
+
+app.use((err, req, res, next) => {
+    console.log(err.message)
+    res.send(err.message)
 })
 
 // Task 22
