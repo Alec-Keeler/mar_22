@@ -1,5 +1,5 @@
 const express = require('express');
-const { User, Post } = require('./models');
+const { User, Post } = require('./db/models');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const cookieParser = require('cookie-parser');
@@ -51,5 +51,6 @@ app.use(express.static('./public'))
 // Task 18a
 app.set('view engine', 'pug')
 // Task 16b
-const port = 8080;
-app.listen(port, () => console.log(`Listening on port ${port}...`))
+// const port = 8080;
+// app.listen(port, () => console.log(`Listening on port ${port}...`))
+module.exports = app;

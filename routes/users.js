@@ -1,7 +1,7 @@
 // Task 20a
 const express = require('express');
 const router = express.Router();
-const { User, Post } = require('../models');
+const { User, Post } = require('../db/models');
 
 // Task 26b
 router.use((req, res, next) => {
