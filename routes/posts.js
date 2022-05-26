@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Post } = require('../models');
+const { Post, Subbreaddit } = require('../models');
 const csrf = require('csurf');
 const csrfProtection = csrf({cookie: true})
 
@@ -26,15 +26,17 @@ const titleChecker = (req, res, next) => {
 }
 
 // Task 25a
-router.get('/new', newMiddleware, csrfProtection, (req, res) => {
-    res.render('create-post', {csrfToken: req.csrfToken(), errors: [], data: {}})
+router.get('/new', newMiddleware, csrfProtection, async(req, res) => {
+    const subs = await Subbreaddit.findAll()
+    res.render('create-post', {csrfToken: req.csrfToken(), errors: [], data: {}, subs})
 })
 
 // Task 25c
 router.post('/', errorArray, titleChecker, csrfProtection, async(req, res) => {
     console.log(req.body)
     if (req.errors.length > 0) {
-        res.render('create-post', {csrfToken: req.csrfToken(), errors: req.errors, data: req.body})
+        const subs = await Subbreaddit.findAll()
+        res.render('create-post', {csrfToken: req.csrfToken(), errors: req.errors, data: req.body, subs})
     } else {
         const { title, content } = req.body
         const post = await Post.create({
