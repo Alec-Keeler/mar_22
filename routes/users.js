@@ -5,6 +5,7 @@ const { User, Post } = require('../db/models');
 const asyncHandler = require('express-async-handler');
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
+const bcrypt = require('bcryptjs');
 
 // const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
@@ -41,11 +42,11 @@ router.get('/:id(\\d+)', async (req, res, next) => {
         const user = await User.findByPk(req.params.id, {
             include: Post
         })
+        res.render('profile', { user })
     } catch (err) {
         next(err)
     }
     // console.log(user)
-    res.render('profile', { user })
 })
 
 router.get('/hello', (req, res) => {
@@ -83,10 +84,11 @@ router.post('/signup', csrfProtection, signUpValidator, async (req, res) => {
         })
     } else {
         //Perform password hashing before creating the user
-
+        const hash = await bcrypt.hash(password, 10)
         const user = await User.create({
-            username, bio, avatar, faveBread, password
+            username, bio, avatar, faveBread, password: hash
         })
+        req.session.auth = {username: user.username, userId: user.id}
         res.redirect('/users')
     }
 })
@@ -105,16 +107,25 @@ router.post('/login', csrfProtection, async (req, res) => {
             username
         }
     })
+
     //Fill out with password hashing
-    // const isPassword = 
-    // if (user && isPassword) {
-    if (user) {
-        
+    const isPassword = await bcrypt.compare(password, user.password)
+    if (user && isPassword) {
+    // if (user) {
+        req.session.auth = { username: user.username, userId: user.id }
         res.redirect('/users')
     } else {
         req.errors.push('Account validation failed.  Please Try again.')
-        res.render('login', { csrfToken: req.csrfToken(), errors: req.errors, user: { email } })
+        res.render('login', { csrfToken: req.csrfToken(), errors: req.errors, user: { username } })
     }
+})
+
+// Task 36c
+router.get('/logout', (req, res) => {
+    delete req.session.auth
+    // Task 36d
+    req.session.save(() => res.redirect('/users'))
+    // res.redirect('/users')
 })
 
 module.exports = router;

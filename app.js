@@ -3,6 +3,7 @@ const { User, Post } = require('./db/models');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 // Task 16a
 const app = express();
@@ -15,7 +16,18 @@ app.use((req, res, next) => {
 
 // Task 27a
 app.use(express.urlencoded({extended: false}))
-app.use(cookieParser())
+app.use(cookieParser('secretString'))
+
+app.use(session({
+    secret: 'secretString',
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use((req, res, next) => {
+    console.log(req.session)
+    next()
+})
 
 // Task 20b
 app.use('/users', usersRouter)

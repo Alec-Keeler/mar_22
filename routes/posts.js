@@ -25,8 +25,16 @@ const titleChecker = (req, res, next) => {
     }
 }
 
+const authCheck = (req, res, next) => {
+    if (req.session.auth) {
+        next()
+    } else {
+        res.redirect('/users/login')
+    }
+}
+
 // Task 25a
-router.get('/new', newMiddleware, csrfProtection, async(req, res) => {
+router.get('/new', authCheck, newMiddleware, csrfProtection, async(req, res) => {
     const subs = await Subbreaddit.findAll()
     res.render('create-post', {csrfToken: req.csrfToken(), errors: [], data: {}, subs})
 })
