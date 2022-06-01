@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const { User, Post } = require('../db/models');
 const asyncHandler = require('express-async-handler');
+const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
 
 // const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
@@ -48,6 +50,71 @@ router.get('/:id(\\d+)', async (req, res, next) => {
 
 router.get('/hello', (req, res) => {
     res.send('Hello :)')
+})
+
+// Task 33a
+router.get('/signup', csrfProtection, (req, res) => {
+    res.render('signup', { csrfToken: req.csrfToken(), errors: [], user: {} })
+})
+
+// Task 33c
+const signUpValidator = (req, res, next) => {
+    const { username, password, confirmPassword } = req.body;
+    req.errors = [];
+
+    if (username.length < 2) {
+        req.errors.push('Please provide a longer username')
+    }
+    if (!(password === confirmPassword)) {
+        req.errors.push('Please make sure to type the same password both times!')
+    }
+
+    next()
+}
+
+// Task 33c
+router.post('/signup', csrfProtection, signUpValidator, async (req, res) => {
+    const { username, bio, avatar, faveBread, password, } = req.body
+    if (req.errors.length > 0) {
+        res.render('signup', {
+            csrfToken: req.csrfToken(),
+            errors: req.errors,
+            user: req.body
+        })
+    } else {
+        //Perform password hashing before creating the user
+
+        const user = await User.create({
+            username, bio, avatar, faveBread, password
+        })
+        res.redirect('/users')
+    }
+})
+
+// Task 34a
+router.get('/login', csrfProtection, (req, res) => {
+    res.render('login', { csrfToken: req.csrfToken(), errors: [], user: {} })
+})
+
+// Task 33c
+router.post('/login', csrfProtection, async (req, res) => {
+    const { username, password } = req.body
+    req.errors = []
+    const user = await User.findOne({
+        where: {
+            username
+        }
+    })
+    //Fill out with password hashing
+    // const isPassword = 
+    // if (user && isPassword) {
+    if (user) {
+        
+        res.redirect('/users')
+    } else {
+        req.errors.push('Account validation failed.  Please Try again.')
+        res.render('login', { csrfToken: req.csrfToken(), errors: req.errors, user: { email } })
+    }
 })
 
 module.exports = router;

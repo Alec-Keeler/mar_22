@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Post, Subbreaddit } = require('../models');
+const { Post, Subbreaddit } = require('../db/models');
 const csrf = require('csurf');
 const csrfProtection = csrf({cookie: true})
 
