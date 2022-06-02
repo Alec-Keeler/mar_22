@@ -4,6 +4,17 @@ const { Post, Subbreaddit } = require('../db/models');
 const csrf = require('csurf');
 const csrfProtection = csrf({cookie: true})
 
+// Task 38
+router.get('/', async (req, res) => {
+    const posts = await Post.findAll();
+    let loggedInUser
+    if (req.session.auth) {
+        loggedInUser = req.session.auth.userId
+    }
+
+    res.render('posts', { posts, loggedInUser });
+})
+
 // Task 26c
 const newMiddleware = (req, res, next) => {
     console.log('You are accessing the new post route')
