@@ -57,15 +57,23 @@ router.post('/', errorArray, titleChecker, csrfProtection, async(req, res) => {
         const subs = await Subbreaddit.findAll()
         res.render('create-post', {csrfToken: req.csrfToken(), errors: req.errors, data: req.body, subs})
     } else {
-        const { title, content } = req.body
+        const { title, content, subId } = req.body
         const post = await Post.create({
             title,
             content,
-            userId: 1,
-            subId: 1
+            userId: req.session.auth.userId,
+            subId
         })
-        res.redirect('/users/1')
+        res.redirect('/posts')
     }
+})
+
+router.delete('/:id(\\d+)', async(req, res) => {
+    // console.log('you have arrived at the delete route handler')
+    const post = await Post.findByPk(req.params.id)
+    await post.destroy()
+
+    res.json({message: 'Success!'})
 })
 
 

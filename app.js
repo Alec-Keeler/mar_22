@@ -17,6 +17,8 @@ app.use((req, res, next) => {
 // Task 27a
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser('secretString'))
+// Task 22
+app.use(express.static('./public'))
 
 app.use(session({
     secret: 'secretString',
@@ -68,8 +70,7 @@ app.use((err, req, res, next) => {
     res.send(err.message)
 })
 
-// Task 22
-app.use(express.static('./public'))
+
 
 // Task 18a
 app.set('view engine', 'pug')
