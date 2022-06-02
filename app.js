@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 
 // Task 27a
 app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 app.use(cookieParser('secretString'))
 // Task 22
 app.use(express.static('./public'))

@@ -76,5 +76,15 @@ router.delete('/:id(\\d+)', async(req, res) => {
     res.json({message: 'Success!'})
 })
 
+router.put('/:id(\\d+)', async(req, res) => {
+    console.log(req.body)
+    const post = await Post.findByPk(req.params.id)
+    post.title = req.body.title
+    post.content = req.body.content
+    await post.save()
+
+    res.json({message: 'Success!', post})
+})
+
 
 module.exports = router;
